@@ -12,23 +12,25 @@ export default class componentName extends Component {
     super(props);
     this.state = {
       open: false,
-      model: "",
-      brand: "",
-      year: "",
-      price: "",
-      fuel: "",
-      color: ""
+      firstname: "",
+      lastname: "",
+      streetaddress: "",
+      postcode: "",
+      city: "",
+      email: "",
+      phone: "",
     };
   }
   handleClickOpen = () => {
     this.setState({
       open: true,
-      brand: this.props.car.brand,
-      color: this.props.car.color,
-      fuel: this.props.car.fuel,
-      price: this.props.car.price,
-      year: this.props.car.year,
-      model: this.props.car.model
+      firstname: this.props.customer.firstname,
+      lastname: this.props.customer.lastname,
+      streetaddress: this.props.customer.streetaddress,
+      postcode: this.props.customer.postcode,
+      city: this.props.customer.city,
+      email: this.props.customer.email,
+      phone: this.props.customer.phone
     });
   };
 
@@ -39,16 +41,16 @@ export default class componentName extends Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  updateCar = () => {
-    const newCar = {
-      model: this.state.model,
-      color: this.state.color,
-      brand: this.state.brand,
-      year: this.state.year,
-      fuel: this.state.fuel,
-      price: this.state.price
+  updateCustomer = () => {
+    const newCustomers = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastnamer,
+      streetaddress: this.state.streetaddress,
+      postcode: this.state.postcode,
+      email: this.state.email,
+      phone: this.state.phone
     };
-    this.props.updateCar(this.props.link, newCar);
+    this.props.updateCustomer(this.props.link, newCustomers);
     this.handleClose();
   };
 
@@ -62,68 +64,68 @@ export default class componentName extends Component {
         >
           <DialogTitle id="form-dialog-title">Edit Car</DialogTitle>
           <DialogContent>
-            <TextField
+          <TextField
               onChange={this.handleChange}
               autoFocus
               margin="dense"
-              id="brand"
-              label="Brand"
-              value={this.state.brand}
+              id="firstname"
+              label="Firstname"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              id="model"
-              label="Model"
-              value={this.state.model}
+              id="lastname"
+              label="Lastname"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              id="year"
-              label="Year"
+              id="streetaddress"
+              label="Streetaddress"
+              fullWidth
+            />
+            <TextField
+              onChange={this.handleChange}
+              margin="dense"
+              id="postcode"
+              label="Postcode"
               type="number"
-              value={this.state.year}
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              id="price"
-              label="Price"
-              type="number"
-              value={this.state.price}
+              id="city"
+              label="City"
               fullWidth
             />
             <TextField
               onChange={this.handleChange}
               margin="dense"
-              id="color"
-              label="Color"
-              value={this.state.color}
+              id="email"
+              label="Email"
               fullWidth
             />
-            <TextField
+             <TextField
               onChange={this.handleChange}
               margin="dense"
-              id="fuel"
-              label="Fuel"
-              value={this.state.fuel}
+              id="phone"
+              label="Phone"
               fullWidth
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="inherit">
               Cancel
             </Button>
-            <Button onClick={this.updateCar} color="primary">
+            <Button onClick={this.updateCustomer} color="inherit">
               Save
             </Button>
           </DialogActions>
         </Dialog>
-        <Button onClick={this.handleClickOpen} color="primary">
+        <Button onClick={this.handleClickOpen} color="inherit">
           EDIT{""}
         </Button>
       </div>

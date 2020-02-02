@@ -42,7 +42,7 @@ export default class componentName extends Component {
       email: this.state.email,
       phone: this.state.phone
     };
-    this.props.saveCustomers(newCustomers);
+    this.props.addCustomers(newCustomers);
     this.handleClose();
   };
 
@@ -109,15 +109,15 @@ export default class componentName extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="inherit">
               Cancel
             </Button>
-            <Button onClick={this.addCustomer} color="primary">
+            <Button onClick={this.addCustomer} color="inherit">
               Save
             </Button>
           </DialogActions>
         </Dialog>
-        <Button onClick={this.handleClickOpen} color="primary">
+        <Button onClick={this.handleClickOpen} color="inherit">
           ADD CUSTOMER{" "}
         </Button>
       </div>
