@@ -9,11 +9,12 @@ import EditCustomer from "./EditCustomer";
 
 
 
-export default class componentName extends Component {
+class CustomerList extends Component {
     constructor(props) {
       super(props);
       this.state = { content: [], message: "" };
     }
+
     componentDidMount() {
      // fetch("https://customerrest.herokuapp.com/api/customers")
      // .then(response => response.json())
@@ -25,27 +26,27 @@ export default class componentName extends Component {
     loadCustomers = () => {
         fetch("https://customerrest.herokuapp.com/api/customers")
           .then(response => response.json())
-          .then(jsondata => this.setState({ cars: jsondata._embedded.content }))
+          .then(jsondata => this.setState({ customers: jsondata.content }))
           .catch(err => console.error(err));
       };
 
 
-      deleteCustomers = customerLink => {
+      deleteCustomer = customerLink => {
         fetch(customerLink.original._links.self.href, { method: "DELETE" })
-          .then(this.loadCars())
+          .then(this.loadCustomers())
     
           .catch(err => console.error(err));
         console.log(customerLink.original._links.self.href);
       };
 
 
-      updatedCustomers = (link, updatedCustomers) => {
+      updateCustomer = (link, updatedCustomer) => {
         fetch(link, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(updatedCustomers)
+          body: JSON.stringify(updatedCustomer)
         })
           .then(res => this.loadCustomers())
           .then(res => this.setState({ open: true, message: "Updated new customers" }))
@@ -53,13 +54,13 @@ export default class componentName extends Component {
       };
 
 
-      saveCustomers = customers => {
+      saveCustomer = customer => {
         fetch("https://customerrest.herokuapp.com/api/customers", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(customers)
+          body: JSON.stringify(customer)
         })
           .then(res => this.loadCustomers())
           .then(res => this.setState({ open: true, message: "Added new customer" }))
@@ -71,7 +72,8 @@ export default class componentName extends Component {
         this.setState({ open: false });
       };
    
-    render() {
+    render() 
+    {
       const columns = [
         { Header: "Firstname", accessor: "firstname" },
         { Header: "Lastname", accessor: "lastname" },
@@ -87,17 +89,17 @@ export default class componentName extends Component {
           sortable: "false",
           width: 100,
           Cell: ({ value, row }) => (
-            <EditCustomer updatedCustomers={this.updatedCustomers} link={value} car={row} />
+            <EditCustomer updateCustomer={this.updateCustomer} link={value} customer={row} />
           )
         },
         {
           Header: "",
-          accessor: "_links.self.href",
+          accessor: "_links.href",
           filterable: "false",
           sortable: "false",
           width: 100,
           Cell: value => (
-            <Button color="secondary" onClick={() => this.deleteCustomers(value)}>
+            <Button color="secondary" onClick={() => this.deleteCustomer(value)}>
               Delete
             </Button>
           )
@@ -105,14 +107,30 @@ export default class componentName extends Component {
       ];
       return (
         <div>
-          <AddCustomer saveCustomers={this.saveCustomers} />
+          <AddCustomer saveCustomer={this.saveCustomer} />
           <ReactTable
             data={this.state.customers}
             columns={columns}
             filterable={true}
+          />
+            <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left"
+            }}
+            open={this.state.open}
+            autoHideDuration={3000}
+            onClose={this.handleClose}
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            message="Customer added successfully"
+            message={this.state.message}
           />
 
         </div>
       );
     }
   }
+
+  export default CustomerList;

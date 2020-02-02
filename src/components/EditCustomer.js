@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export default class componentName extends Component {
+class EditCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,14 +23,7 @@ export default class componentName extends Component {
   }
   handleClickOpen = () => {
     this.setState({
-      open: true,
-      firstname: this.props.customer.firstname,
-      lastname: this.props.customer.lastname,
-      streetaddress: this.props.customer.streetaddress,
-      postcode: this.props.customer.postcode,
-      city: this.props.customer.city,
-      email: this.props.customer.email,
-      phone: this.props.customer.phone
+      open: true 
     });
   };
 
@@ -42,7 +35,7 @@ export default class componentName extends Component {
   };
 
   updateCustomer = () => {
-    const newCustomers = {
+    const newCustomer = {
       firstname: this.state.firstname,
       lastname: this.state.lastnamer,
       streetaddress: this.state.streetaddress,
@@ -50,7 +43,7 @@ export default class componentName extends Component {
       email: this.state.email,
       phone: this.state.phone
     };
-    this.props.updateCustomer(this.props.link, newCustomers);
+    this.props.updateCustomer(this.props.link, newCustomer);
     this.handleClose();
   };
 
@@ -132,3 +125,5 @@ export default class componentName extends Component {
     );
   }
 }
+
+export default EditCustomer;

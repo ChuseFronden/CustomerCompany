@@ -7,7 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export default class componentName extends Component {
+class AppCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,8 +32,8 @@ export default class componentName extends Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  addCusomers = () => {
-    const newCustomers = {
+  addCusomer = () => {
+    const newCustomer = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       streetaddress: this.state.streetaddress,
@@ -42,7 +42,7 @@ export default class componentName extends Component {
       email: this.state.email,
       phone: this.state.phone
     };
-    this.props.addCustomers(newCustomers);
+    this.props.saveCustomer(newCustomer);
     this.handleClose();
   };
 
@@ -124,3 +124,5 @@ export default class componentName extends Component {
     );
   }
 }
+
+export default AppCustomer;

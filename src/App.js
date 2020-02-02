@@ -16,8 +16,9 @@ class App extends Component {
             Personal Trainer company 
             </Typography>
           </Toolbar>
-          <CustomerList />
+          
         </AppBar>
+        <CustomerList />
        
       </div>
     );
